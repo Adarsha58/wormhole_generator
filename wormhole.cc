@@ -1,3 +1,4 @@
+
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
     cmd.Parse(argc, argv);
 
     NodeContainer nodes;
-    nodes.Create(6);
+    nodes.Create(18);
 
     // Set up WiFi
     WifiHelper wifi;
@@ -91,7 +92,10 @@ int main(int argc, char *argv[])
     // Introduce wormhole on the end point
     if (enableWormhole)
     {
-        NodeContainer wormholeNodes(nodes.Get(0), nodes.Get(5));  // Create wormhole between node 1 and 5
+        NodeContainer wormholeNodes1(nodes.Get(0), nodes.Get(5));  // Create wormhole between node 1 and 6
+        NodeContainer wormholeNodes2(nodes.Get(2), nodes.Get(8));
+        NodeContainer wormholeNodes3(nodes.Get(7), nodes.Get(10));
+        NodeContainer wormholeNodes4(nodes.Get(11), nodes.Get(16));
         NetDeviceContainer mal_devices = wifi.Install(wifiPhy, wifiMac, wormholeNodes);
 
         // Assign IP addresses
